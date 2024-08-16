@@ -17,6 +17,8 @@ public class BurgerTest {
     Bun bun;
     @Mock
     Ingredient ingredient;
+    @Mock
+    Ingredient ingredientTwo;
 
     Burger burger;
 
@@ -55,5 +57,22 @@ public class BurgerTest {
 
     @Test
     public void getReceiptTest() {
+        Mockito.when(bun.getPrice()).thenReturn(20F);
+        Mockito.when(bun.getName()).thenReturn("black buns");
+
+        Mockito.when(ingredient.getPrice()).thenReturn(1F);
+        Mockito.when(ingredient.getType()).thenReturn(IngredientType.SAUCE);
+        Mockito.when(ingredient.getName()).thenReturn("hot sauce");
+
+        Mockito.when(ingredientTwo.getPrice()).thenReturn(1F);
+        Mockito.when(ingredientTwo.getType()).thenReturn(IngredientType.FILLING);
+        Mockito.when(ingredientTwo.getName()).thenReturn("cutlet");
+
+        burger.setBuns(bun);
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientTwo);
+
+        Assert.assertEquals(String.format("(==== %s ====)%n= sauce %s =%n= filling %s =%n(==== %s ====)%n%nPrice: %.6f%n",
+                "black buns", "hot sauce", "cutlet", "black buns", burger.getPrice()), burger.getReceipt());
     }
 }

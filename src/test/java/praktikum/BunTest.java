@@ -14,7 +14,7 @@ public class BunTest {
     Bun bun;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         bun = new Bun(name, price);
     }
 
