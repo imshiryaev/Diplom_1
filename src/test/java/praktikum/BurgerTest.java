@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
@@ -23,7 +22,7 @@ public class BurgerTest {
     Burger burger;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         burger = new Burger();
     }
 
@@ -43,6 +42,12 @@ public class BurgerTest {
 
     @Test
     public void moveIngredientTest() {
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientTwo);
+        burger.moveIngredient(0,1);
+
+        Assert.assertEquals(ingredient, burger.ingredients.get(1));
+        Assert.assertEquals(ingredientTwo, burger.ingredients.get(0));
     }
 
     @Test
